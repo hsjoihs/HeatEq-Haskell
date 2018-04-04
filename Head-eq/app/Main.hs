@@ -66,13 +66,7 @@ sten = R.makeStencil (Z :. 3)
     Z :.  1 -> Just dr
     _       -> Nothing)
 
-
-u :: Vector1dU
-u = makeInitCondition sin xMin xMax nDiv
-
-
---timeDev :: Vector1dU -> Vector1dD
---timeDev u =
+-- 補助函数
 timeDevSub :: Vector1dU -> Vector1dD
 timeDevSub u =
   dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
@@ -85,26 +79,18 @@ timeDevSub u =
     infixl 7 ><
     (><) x v = R.map (* x) v
 
+-- 時間をdt進める函数
 timeDev :: Vector1dU -> Vector1dD
 timeDev u = zero R.++ (R.extract (Z :. 2) (Z :.(nDiv-1)) $ timeDevSub u) R.++ zero
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
 
---debug :: Vector1dU -> Vector1dD
---debug u = 
---  dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
---  where
---    zero = R.fromListUnboxed (Z :. 1) [0.0]
---    u1 = u    R.++ zero R.++ zero
---    u2 = zero R.++ u    R.++ zero
---    u3 = zero R.++ zero R.++ u
---    -- Scalar multiplication in Repa
---    infixl 7 ><
---    (><) x v = R.map (* x) v
+u :: Vector1dU
+u = makeInitCondition sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  print $ makeInitCondition sin xMin xMax nDiv
+  print $ u
   print $ R.computeUnboxedS $ timeDevSub u
   print $ R.computeUnboxedS $ timeDev u
 
