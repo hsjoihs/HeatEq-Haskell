@@ -8,6 +8,7 @@ import qualified Data.Array.Repa as R
 import Data.Array.Repa.Stencil as R
 import Data.Array.Repa.Stencil.Dim2 as R
 import Data.Array.Repa.Slice as R
+import qualified Data.List as List
 
 -- Unboxed Array Type
 type Vector1dU = R.Array R.U R.DIM1 Double
@@ -119,18 +120,19 @@ u' = makeInitCondition' sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  print $ u
-  print $ R.computeUnboxedS $ timeDev u
-  print $ R.computeUnboxedS $ (timeDev' . timeDev') u'
+  mapM_ print $ R.toList u
+  -- dt後
+--  print $ R.computeUnboxedS $ timeDev u
+  -- さらにdt後
+--  print $ R.computeUnboxedS $ (timeDev' . timeDev') u'
+  -- さらにdt後
+--  print $ R.computeUnboxedS $ (foldl (.) id [timeDev', timeDev', timeDev']) u'
+  -- さらにdt後
+--  print $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
 
-
-
-
-
-
-
-
-
-
-
-
+  putStrLn "\n"
+  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 5 timeDev')) u'
+  putStrLn "\n"
+  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 10 timeDev')) u'
+  putStrLn "\n"
+  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 15 timeDev')) u'
