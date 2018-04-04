@@ -81,11 +81,11 @@ u = makeInitCondition sin xMin xMax nDiv
 --u1 = R.mapStencil2 (R.BoundConst 0) sten u
 
 --x = (R.computeUnboxedS $ R.append u u) `asTypeOf` u
-x1 = (R.computeUnboxedS $ R.append zero u) `asTypeOf` u
-x2 = (R.computeUnboxedS $ R.append u zero) `asTypeOf` u
---x3 = R.computeUnboxedS R.computeUnboxedS $ R.append u zero
+x1 = R.computeUnboxedS $ R.append zero $ R.append zero u
+x2 = R.computeUnboxedS $ R.append (R.append u zero) zero
+x3 = R.computeUnboxedS $ R.append zero $ R.append u zero
 
---u2 = zipWith (\x y -> r*x + (1-2*r)*y) (x1 R.+^ x2) u
+u2 = zipWith (\x y -> r*x + (1-2*r)*y) (x1 R.+^ x2) x3
 
 main :: IO ()
 main = do
