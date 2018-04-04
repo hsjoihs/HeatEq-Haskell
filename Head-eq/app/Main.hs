@@ -50,7 +50,7 @@ sten2 :: R.Stencil R.DIM2 Double
 sten2 = R.makeStencil (Z :. 3 :. 0)
   (\ix -> case ix of
     Z :. -1 :. _ -> Just r
-    Z :.  0 :. _ -> Just (1.0 - r)
+    Z :.  0 :. _ -> Just (1.0 - 2.0*r)
     Z :.  1 :. _ -> Just r
     _            -> Nothing)
 
@@ -59,15 +59,29 @@ sten :: R.Stencil R.DIM1 Double
 sten = R.makeStencil (Z :. 3)
   (\ix -> case ix of
     Z :. -1 -> Just r
-    Z :.  0 -> Just (1.0 - r)
+    Z :.  0 -> Just (1.0 - 2.0*r)
     Z :.  1 -> Just r
     _       -> Nothing)
+
+-----------------
+
+-- timeDev :: Vector1d -> Vector1d
+-- timeDev =
+
+
+
+
 
 u :: Vector1d
 u = makeInitCondition sin xMin xMax nDiv
 
 --u1 = R.mapStencil2 (R.BoundConst 0) sten u
 
+x = (R.computeP $ R.append u u) `asTypeOf` u
+
 main :: IO ()
 main = do
-  print $ makeInitCondition sin xMin xMax nDiv
+  print $ 1
+
+
+
