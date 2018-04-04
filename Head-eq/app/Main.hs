@@ -85,12 +85,11 @@ x1 = R.computeUnboxedS $ R.append zero $ R.append zero u
 x2 = R.computeUnboxedS $ R.append (R.append u zero) zero
 x3 = R.computeUnboxedS $ R.append zero $ R.append u zero
 
-u2 = zipWith (\x y -> r*x + (1-2*r)*y) (x1 R.+^ x2) x3
+u2 = R.computeUnboxedS $ R.zipWith (\x y -> r*x + (1-2*r)*y) (x1 R.+^ x2) x3
 
 main :: IO ()
 main = do
-  print $ x1
-  print $ x2
+  print $ u2
 
 
 
