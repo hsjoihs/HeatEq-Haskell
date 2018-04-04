@@ -3,13 +3,15 @@
 --{-# LANGUAGE TemplateHaskell, QuasiQuotes #-}
 module Main where
 
-import Lib
 import Data.Array.Repa (Z(..), (:.)(..))
 import qualified Data.Array.Repa as R
 import Data.Array.Repa.Stencil as R
 import Data.Array.Repa.Stencil.Dim2 as R
 
-type Vector1d = R.Array R.U R.DIM1 Double
+-- Unboxed Array Type
+type Vector1dU = R.Array R.U R.DIM1 Double
+-- Delay Array Type
+type Vector1dD = R.Array R.D R.DIM1 Double
 
 ------------ Parameter ------------
 -- 分割数
@@ -28,15 +30,15 @@ dt = 0.001
 d :: (Floating a) => a
 d = 1.0
 -- よく使う定数
-r :: (Floating a) => a
-r = d * dt / (dx * dx)
+dr :: (Floating a) => a
+dr = d * dt / (dx * dx)
   where
     dx :: (Floating a) => a
     dx = (xMax - xMin) / fromIntegral nDiv
 -----------------------------------
 
 -- 区間[st, ed]に対して函数fを適用した函数を初期条件とする．分割数はnDiv．
-makeInitCondition :: (Double -> Double) -> Double -> Double -> Int -> Vector1d
+makeInitCondition :: (Double -> Double) -> Double -> Double -> Int -> Vector1dU
 makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st ed num
   where
     makeList :: (Floating a, Integral b) => (a -> a) -> a -> a -> b -> [a]
@@ -45,51 +47,40 @@ makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st 
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
 
-zero :: Vector1d
-zero = R.fromListUnboxed (Z:.1) [0.0]
-
 -- stencilとかいうやつ
 sten2 :: R.Stencil R.DIM2 Double
 sten2 = R.makeStencil (Z :. 3 :. 0)
-  (\ix -> case ix of
-    Z :. -1 :. _ -> Just r
-    Z :.  0 :. _ -> Just (1.0 - 2.0*r)
-    Z :.  1 :. _ -> Just r
+  (\ ix -> case ix of
+    Z :. -1 :. _ -> Just dr
+    Z :.  0 :. _ -> Just (1.0 - 2.0 * dr)
+    Z :.  1 :. _ -> Just dr
     _            -> Nothing)
 
 -- stencilとかいうやつ
 sten :: R.Stencil R.DIM1 Double
 sten = R.makeStencil (Z :. 3)
-  (\ix -> case ix of
-    Z :. -1 -> Just r
-    Z :.  0 -> Just (1.0 - 2.0*r)
-    Z :.  1 -> Just r
+  (\ ix -> case ix of
+    Z :. -1 -> Just dr
+    Z :.  0 -> Just (1.0 - 2.0 * dr)
+    Z :.  1 -> Just dr
     _       -> Nothing)
 
------------------
 
--- timeDev :: Vector1d -> Vector1d
--- timeDev =
-
-
-
-
-
-u :: Vector1d
+u :: Vector1dU
 u = makeInitCondition sin xMin xMax nDiv
 
---u1 = R.mapStencil2 (R.BoundConst 0) sten u
 
---x = (R.computeUnboxedS $ R.append u u) `asTypeOf` u
-x1 = R.computeUnboxedS $ zero R.++ zero  R.++ u
-x2 = R.computeUnboxedS $ u    R.++ zero  R.++ zero
-x3 = R.computeUnboxedS $ zero R.++ u     R.++ zero
-
-u2 = R.computeUnboxedS $ R.zipWith (\x y -> r*x + (1-2*r)*y) (x1 R.+^ x2) x3
+timeDev :: Vector1dU -> Vector1dD
+timeDev u1 = 
+    dr >< u1 R.+^ (1 - 2 * dr) >< u2 R.+^ dr >< u3
+    where
+        zero = R.fromListUnboxed (Z :. 1) [0.0]
+        u2 = zero R.++ u1
+        u3 =  zero R.++ u2
+        -- Scalar multiplication in Repa
+        infixl 7 ><
+        (><) x v = R.map (* x) v
 
 main :: IO ()
 main = do
-  print $ u2
-
-
-
+  print $ R.computeUnboxedS $ timeDev u
