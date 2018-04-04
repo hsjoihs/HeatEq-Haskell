@@ -1,22 +1,38 @@
 -- Solve the Heat Equation @mino2357
 {-# LANGUAGE TypeOperators #-}
+--{-# LANGUAGE TemplateHaskell, QuasiQuotes #-}
 module Main where
 
 import Lib
---import qualified Data.Array.Repa as R
-import Data.Array.Repa as R
+import Data.Array.Repa (Z(..), (:.)(..))
+import qualified Data.Array.Repa as R
+import Data.Array.Repa.Stencil as R
+import Data.Array.Repa.Stencil.Dim2 as R
 
 type Vector1d = R.Array R.U R.DIM1 Double
 
 ------------ Parameter ------------
+-- 分割数
 nDiv :: (Integral a) => a
 nDiv = 4
-
-xBegin :: (Floating a) => a
-xBegin = 0.0
-
-xEnd :: (Floating a) => a
-xEnd = pi
+-- 左端
+xMin :: (Floating a) => a
+xMin = 0.0
+-- 右端
+xMax :: (Floating a) => a
+xMax = pi
+-- 時間刻み
+dt :: (Floating a) => a
+dt = 0.001
+-- 拡散係数
+d :: (Floating a) => a
+d = 1.0
+-- よく使う定数
+r :: (Floating a) => a
+r = d * dt / (dx * dx)
+  where
+    dx :: (Floating a) => a
+    dx = (xMax - xMin) / fromIntegral nDiv
 -----------------------------------
 
 -- 区間[st, ed]に対して函数fを適用した函数を初期条件とする．分割数はnDiv．
@@ -29,6 +45,29 @@ makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st 
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
 
+-- stencilとかいうやつ
+sten2 :: R.Stencil R.DIM2 Double
+sten2 = R.makeStencil (Z :. 3 :. 0)
+  (\ix -> case ix of
+    Z :. -1 :. _ -> Just r
+    Z :.  0 :. _ -> Just (1.0 - r)
+    Z :.  1 :. _ -> Just r
+    _            -> Nothing)
+
+-- stencilとかいうやつ
+sten :: R.Stencil R.DIM1 Double
+sten = R.makeStencil (Z :. 3)
+  (\ix -> case ix of
+    Z :. -1 -> Just r
+    Z :.  0 -> Just (1.0 - r)
+    Z :.  1 -> Just r
+    _       -> Nothing)
+
+u :: Vector1d
+u = makeInitCondition sin xMin xMax nDiv
+
+--u1 = R.mapStencil2 (R.BoundConst 0) sten u
+
 main :: IO ()
 main = do
-  print $ makeInitCondition sin xBegin xEnd nDiv
+  print $ makeInitCondition sin xMin xMax nDiv
