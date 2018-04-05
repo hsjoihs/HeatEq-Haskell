@@ -18,7 +18,7 @@ type Vector1dD = R.Array R.D R.DIM1 Double
 ------------ Parameter ------------
 -- 分割数
 nDiv :: (Integral a) => a
-nDiv = 10
+nDiv = 128
 -- 左端
 xMin :: (Floating a) => a
 xMin = 0.0
@@ -27,7 +27,10 @@ xMax :: (Floating a) => a
 xMax = pi
 -- 時間刻み
 dt :: (Floating a) => a
-dt = 0.01
+dt = (1.0 / 6.0) * dx * dx
+  where
+    dx :: (Floating a) => a
+    dx = (xMax - xMin) / fromIntegral nDiv
 -- 拡散係数
 d :: (Floating a) => a
 d = 1.0
@@ -77,9 +80,9 @@ sten = R.makeStencil (Z :. 3)
     _       -> Nothing)
 
 -- 補助函数
-timeDevSub :: Vector1dU -> Vector1dD
+timeDevSub :: Vector1dU -> Vector1dU
 timeDevSub u =
-  dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
+  R.computeUnboxedS $ dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
     u1 = u    R.++ zero R.++ zero
@@ -102,8 +105,8 @@ timeDevSub' u =
     (><) x v = R.map (* x) v
 
 -- 時間をdt進める函数
-timeDev :: Vector1dU -> Vector1dD
-timeDev u = zero R.++ (R.extract (Z :. 2) (Z :.(nDiv-1)) $ timeDevSub u) R.++ zero
+timeDev :: Vector1dU -> Vector1dU
+timeDev u = R.computeUnboxedS $ zero R.++ (R.extract (Z :. 2) (Z :.(nDiv-1)) $ timeDevSub u) R.++ zero
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
 
@@ -121,18 +124,19 @@ u' = makeInitCondition' sin xMin xMax nDiv
 main :: IO ()
 main = do
   mapM_ print $ R.toList u
-  -- dt後
---  print $ R.computeUnboxedS $ timeDev u
-  -- さらにdt後
---  print $ R.computeUnboxedS $ (timeDev' . timeDev') u'
-  -- さらにdt後
---  print $ R.computeUnboxedS $ (foldl (.) id [timeDev', timeDev', timeDev']) u'
-  -- さらにdt後
---  print $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
+  
+  putStrLn "\n"
+  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 100 timeDev)) u
+  putStrLn "\n"
+  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 200 timeDev)) u
+  putStrLn "\n"
+  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 500 timeDev)) u
+  putStrLn "\n"
+  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 1000 timeDev)) u
 
-  putStrLn "\n"
-  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 5 timeDev')) u'
-  putStrLn "\n"
-  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 10 timeDev')) u'
-  putStrLn "\n"
-  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 15 timeDev')) u'
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 5 timeDev')) u'
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 10 timeDev')) u'
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 15 timeDev')) u'
