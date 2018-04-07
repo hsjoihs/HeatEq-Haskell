@@ -61,24 +61,6 @@ makeInitCondition' f st ed num = R.delay $ R.fromListUnboxed (Z:.(nDiv+1)) $ mak
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
 
--- stencilとかいうやつ
-sten2 :: R.Stencil R.DIM2 Double
-sten2 = R.makeStencil (Z :. 3 :. 0)
-  (\ ix -> case ix of
-    Z :. -1 :. _ -> Just dr
-    Z :.  0 :. _ -> Just (1.0 - 2.0 * dr)
-    Z :.  1 :. _ -> Just dr
-    _            -> Nothing)
-
--- stencilとかいうやつ
-sten :: R.Stencil R.DIM1 Double
-sten = R.makeStencil (Z :. 3)
-  (\ ix -> case ix of
-    Z :. -1 -> Just dr
-    Z :.  0 -> Just (1.0 - 2.0 * dr)
-    Z :.  1 -> Just dr
-    _       -> Nothing)
-
 -- 補助函数
 timeDevSub :: Vector1dU -> Vector1dU
 timeDevSub u =
@@ -123,16 +105,15 @@ u' = makeInitCondition' sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  mapM_ print $ R.toList u
-  
-  putStrLn "\n"
   mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 100 timeDev)) u
-  putStrLn "\n"
-  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 200 timeDev)) u
-  putStrLn "\n"
-  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 500 timeDev)) u
-  putStrLn "\n"
-  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 1000 timeDev)) u
+  --putStrLn "\n"
+  --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 200 timeDev)) u
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 500 timeDev)) u
+--  putStrLn "\n"
+--  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 1000 timeDev)) u
 
 --  putStrLn "\n"
 --  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 5 timeDev')) u'
