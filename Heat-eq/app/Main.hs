@@ -106,7 +106,7 @@ u' = makeInitCondition' sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000000 timeDev))
+  mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000000 timeDev)) u
   mapM_ print $ R.toList $ List.foldr' ($) u (replicate 1000000 timeDev)
   --putStrLn "\n"
   --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
