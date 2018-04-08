@@ -53,15 +53,6 @@ makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st 
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
 
-makeInitCondition' :: (Double -> Double) -> Double -> Double -> Int -> Vector1dD
-makeInitCondition' f st ed num = R.delay $ R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st ed num
-  where
-    makeList :: (Floating a, Integral b) => (a -> a) -> a -> a -> b -> [a]
-    makeList f st ed num = f <$> makeInterval st ed num
-    makeInterval :: (Floating a, Integral b) => a -> a -> b -> [a]
-    makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
-      where dx = (ed - st) / fromIntegral num
-
 -- 補助函数
 timeDevSub :: Vector1dU -> Vector1dU
 timeDevSub u =
@@ -75,34 +66,14 @@ timeDevSub u =
     infixl 7 ><
     (><) x = R.map (* x)
 
-timeDevSub' :: Vector1dD -> Vector1dD
-timeDevSub' u =
-  dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
-  where
-    zero = R.delay $ R.fromListUnboxed (Z :. 1) [0.0]
-    u1 = u    R.++ zero R.++ zero
-    u2 = zero R.++ u    R.++ zero
-    u3 = zero R.++ zero R.++ u
-    -- Scalar multiplication in Repa
-    infixl 7 ><
-    (><) x = R.map (* x)
-
 -- 時間をdt進める函数
 timeDev :: Vector1dU -> Vector1dU
 timeDev u = R.computeUnboxedS $ zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (timeDevSub u) R.++ zero
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
 
-timeDev' :: Vector1dD -> Vector1dD
-timeDev' u = zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (timeDevSub' u) R.++ zero
-  where
-    zero = R.delay $ R.fromListUnboxed (Z :. 1) [0.0]
-
 u :: Vector1dU
 u = makeInitCondition sin xMin xMax nDiv
-
-u' :: Vector1dD
-u' = makeInitCondition' sin xMin xMax nDiv
 
 main :: IO ()
 main = do
