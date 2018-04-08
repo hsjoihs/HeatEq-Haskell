@@ -20,7 +20,7 @@ type Vector1dD = R.Array R.D R.DIM1 Double
 ------------ Parameter ------------
 -- 分割数
 nDiv :: (Integral a) => a
-nDiv = 128
+nDiv = 1024*1024*50
 -- 左端
 xMin :: (Floating a) => a
 xMin = 0.0
