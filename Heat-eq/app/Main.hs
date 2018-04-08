@@ -9,6 +9,7 @@ import Data.Array.Repa.Stencil as R
 import Data.Array.Repa.Stencil.Dim2 as R
 import Data.Array.Repa.Slice as R
 import qualified Data.List as List
+import qualified Data.Foldable as List
 
 -- Unboxed Array Type
 type Vector1dU = R.Array R.U R.DIM1 Double
@@ -105,6 +106,7 @@ u' = makeInitCondition' sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 100 timeDev)) u
+  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000000 timeDev))
+  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 1000000 timeDev)
   --putStrLn "\n"
   --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
