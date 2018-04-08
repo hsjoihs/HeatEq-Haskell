@@ -20,7 +20,7 @@ type Vector1dD = R.Array R.D R.DIM1 Double
 ------------ Parameter ------------
 -- 分割数
 nDiv :: (Integral a) => a
-nDiv = 1024*1024*50
+nDiv = 1024*1024
 -- 左端
 xMin :: (Floating a) => a
 xMin = 0.0
@@ -76,8 +76,8 @@ u = makeInitCondition sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  --mapM_ print $ R.toList $ (runIdentity . timeDev) u
-  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 100000 timeDev)
-  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000000 timeDev)) u
-  --putStrLn "\n"
-  --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
+  -- 函数適用
+  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 100 timeDev)
+  
+  -- 函数合成 実行注意
+  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 100 timeDev)) u
