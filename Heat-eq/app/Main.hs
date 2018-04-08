@@ -10,6 +10,7 @@ import Data.Array.Repa.Stencil.Dim2 as R
 import Data.Array.Repa.Slice as R
 import qualified Data.List as List
 import qualified Data.Foldable as List
+import Data.Functor.Identity
 
 -- Unboxed Array Type
 type Vector1dU = R.Array R.U R.DIM1 Double
@@ -54,9 +55,9 @@ makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st 
       where dx = (ed - st) / fromIntegral num
 
 -- 補助函数
-timeDevSub :: Vector1dU -> Vector1dU
+timeDevSub :: (Monad m) => Vector1dU -> m Vector1dU
 timeDevSub u =
-  R.computeUnboxedS $ dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
+  R.computeUnboxedP $ dr >< u1 R.+^ (1.0 - 2.0 * dr) >< u2 R.+^ dr >< u3
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
     u1 = u    R.++ zero R.++ zero
@@ -67,8 +68,8 @@ timeDevSub u =
     (><) x = R.map (* x)
 
 -- 時間をdt進める函数
-timeDev :: Vector1dU -> Vector1dU
-timeDev u = R.computeUnboxedS $ zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (timeDevSub u) R.++ zero
+timeDev :: (Monad m) => Vector1dU -> m Vector1dU
+timeDev u = R.computeUnboxedP $ zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (runIdentity . timeDevSub $ u) R.++ zero
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
 
@@ -77,7 +78,7 @@ u = makeInitCondition sin xMin xMax nDiv
 
 main :: IO ()
 main = do
-  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 10000000 timeDev)
+  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 1 (runIdentity . timeDev))
   --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000000 timeDev)) u
   --putStrLn "\n"
   --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
