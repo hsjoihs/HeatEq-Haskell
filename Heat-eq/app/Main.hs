@@ -48,7 +48,7 @@ makeInitCondition :: (Double -> Double) -> Double -> Double -> Int -> Vector1dU
 makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st ed num
   where
     makeList :: (Floating a, Integral b) => (a -> a) -> a -> a -> b -> [a]
-    makeList f st ed num = fmap f $ makeInterval st ed num
+    makeList f st ed num = f <$> makeInterval st ed num
     makeInterval :: (Floating a, Integral b) => a -> a -> b -> [a]
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
@@ -57,7 +57,7 @@ makeInitCondition' :: (Double -> Double) -> Double -> Double -> Int -> Vector1dD
 makeInitCondition' f st ed num = R.delay $ R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st ed num
   where
     makeList :: (Floating a, Integral b) => (a -> a) -> a -> a -> b -> [a]
-    makeList f st ed num = fmap f $ makeInterval st ed num
+    makeList f st ed num = f <$> makeInterval st ed num
     makeInterval :: (Floating a, Integral b) => a -> a -> b -> [a]
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
@@ -73,7 +73,7 @@ timeDevSub u =
     u3 = zero R.++ zero R.++ u
     -- Scalar multiplication in Repa
     infixl 7 ><
-    (><) x v = R.map (* x) v
+    (><) x = R.map (* x)
 
 timeDevSub' :: Vector1dD -> Vector1dD
 timeDevSub' u =
@@ -85,16 +85,16 @@ timeDevSub' u =
     u3 = zero R.++ zero R.++ u
     -- Scalar multiplication in Repa
     infixl 7 ><
-    (><) x v = R.map (* x) v
+    (><) x = R.map (* x)
 
 -- 時間をdt進める函数
 timeDev :: Vector1dU -> Vector1dU
-timeDev u = R.computeUnboxedS $ zero R.++ (R.extract (Z :. 2) (Z :.(nDiv-1)) $ timeDevSub u) R.++ zero
+timeDev u = R.computeUnboxedS $ zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (timeDevSub u) R.++ zero
   where
     zero = R.fromListUnboxed (Z :. 1) [0.0]
 
 timeDev' :: Vector1dD -> Vector1dD
-timeDev' u = zero R.++ (R.extract (Z :. 2) (Z :.(nDiv-1)) $ timeDevSub' u) R.++ zero
+timeDev' u = zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) (timeDevSub' u) R.++ zero
   where
     zero = R.delay $ R.fromListUnboxed (Z :. 1) [0.0]
 
