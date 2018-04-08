@@ -77,7 +77,7 @@ u = makeInitCondition sin xMin xMax nDiv
 main :: IO ()
 main = do
   -- 函数適用
-  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 100 timeDev)
+  mapM_ print $ R.toList $ List.foldr' ($) u (replicate 1000 timeDev)
   
   -- 函数合成 実行注意
-  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 100 timeDev)) u
+  --mapM_ print $ R.toList $ (List.foldr' (.) id (replicate 1000 timeDev)) u
