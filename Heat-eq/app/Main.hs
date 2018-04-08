@@ -108,16 +108,3 @@ main = do
   mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 100 timeDev)) u
   --putStrLn "\n"
   --mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 4 timeDev')) u'
---  putStrLn "\n"
---  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 200 timeDev)) u
---  putStrLn "\n"
---  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 500 timeDev)) u
---  putStrLn "\n"
---  mapM_ print $ R.toList $ (List.foldl' (.) id (replicate 1000 timeDev)) u
-
---  putStrLn "\n"
---  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 5 timeDev')) u'
---  putStrLn "\n"
---  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 10 timeDev')) u'
---  putStrLn "\n"
---  mapM_ print $ R.toList $ R.computeUnboxedS $ (List.foldl' (.) id (replicate 15 timeDev')) u'

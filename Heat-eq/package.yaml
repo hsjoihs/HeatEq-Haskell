@@ -1,6 +1,6 @@
-name:                Head-eq
+name:                Heat-eq
 version:             0.1.0.0
-github:              "mino2357/Head-eq"
+github:              "mino2357/Heat-eq"
 license:             BSD3
 author:              "mino2357"
 maintainer:          "mino2357@gmail.com"
@@ -17,7 +17,7 @@ extra-source-files:
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on Github at <https://github.com/mino2357/Head-eq#readme>
+description:         Please see the README on Github at <https://github.com/mino2357/Heat-eq#readme>
 
 dependencies:
 - base >= 4.7 && < 5
@@ -26,7 +26,7 @@ library:
   source-dirs: src
 
 executables:
-  Head-eq-exe:
+  Heat-eq-exe:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
@@ -34,7 +34,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - Head-eq
+    - Heat-eq
     - repa
 
 tests:
@@ -46,5 +46,5 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - Head-eq
+    - Heat-eq
     - repa
