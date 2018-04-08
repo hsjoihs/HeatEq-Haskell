@@ -54,8 +54,6 @@ makeInitCondition f st ed num = R.fromListUnboxed (Z:.(nDiv+1)) $ makeList f st 
     makeInterval st ed num = [st + dx * fromIntegral i | i<-[0..num]]
       where dx = (ed - st) / fromIntegral num
 
--- 補助函数
-
 -- 時間をdt進める函数
 timeDev :: Vector1dU -> Vector1dU
 timeDev u = R.computeUnboxedS $ zero R.++ R.extract (Z :. 2) (Z :.(nDiv-1)) ((runIdentity . timeDevSub) u) R.++ zero
