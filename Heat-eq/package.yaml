@@ -35,9 +35,11 @@ executables:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -fllvm
     dependencies:
     - Heat-eq
     - repa
+    - parallel
 
 tests:
   Head-eq-test:
@@ -47,6 +49,8 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -fllvm
     dependencies:
     - Heat-eq
     - repa
+    - parallel
