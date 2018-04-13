@@ -1,0 +1,485 @@
+	Mon Apr  9 05:28 2018 Time and Allocation Profiling Report  (Final)
+
+	   Heat-eq-exe +RTS -N -p -RTS
+
+	total time  =       25.21 secs   (25210 ticks @ 1000 us, 1 processor)
+	total alloc = 33,828,169,504 bytes  (excludes profiling overheads)
+
+COST CENTRE           MODULE                        SRC                                             %time %alloc
+
+main                  Main                          app/Main.hs:(78,1)-(80,67)                       26.3   33.7
+linearIndex           Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54          15.0   14.6
+unsafeIndex           Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                  11.8    8.2
+fromIndex             Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)        10.9    8.9
+unsafeLinearIndex     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   6.0   10.9
+toIndex               Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         4.7    3.5
+basicUnsafeIndexM     Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 4.0    2.0
+deepSeqMVec           Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(78,2)-(79,15)    3.3    6.2
+timeDev.timeDevSub    Main                          app/Main.hs:(64,5)-(72,28)                        2.7    1.0
+unsafeLinearIndex     Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2.2    0.0
+timeDev.timeDevSub.>< Main                          app/Main.hs:72:9-28                               2.1    4.5
+primitive             Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2.0    0.5
+unsafeWriteMVec       Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    1.4    2.6
+fromIndex.r           Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        1.4    0.0
+timeDev.timeDevSub.u2 Main                          app/Main.hs:68:9-37                               1.4    0.0
+basicUnsafeWrite      Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         1.3    2.6
+timeDev.timeDevSub.u1 Main                          app/Main.hs:67:9-37                               1.2    0.0
+
+
+                                                                                                                                            individual      inherited
+COST CENTRE                             MODULE                        SRC                                               no.      entries  %time %alloc   %time %alloc
+
+MAIN                                    MAIN                          <built-in>                                        1175          0    0.0    0.0   100.0  100.0
+ CAF                                    GHC.Conc.Signal               <entire-module>                                   1286          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.Conc.Sync                 <entire-module>                                   1285          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.Float                     <entire-module>                                   1278          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.IO.Encoding               <entire-module>                                   1270          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.IO.Encoding.Iconv         <entire-module>                                   1268          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.IO.Exception              <entire-module>                                   1262          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.IO.Handle.FD              <entire-module>                                   1260          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.IO.Handle.Text            <entire-module>                                   1258          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.Event.Thread              <entire-module>                                   1219          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.Event.Poll                <entire-module>                                   1191          0    0.0    0.0     0.0    0.0
+ CAF                                    GHC.Integer.Type              <entire-module>                                   1186          0    0.0    0.0     0.0    0.0
+ CAF:$fApplicativeId4                   Data.Vector.Fusion.Util       <no location info>                                2150          0    0.0    0.0     0.0    0.0
+  pure                                  Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:31:3-11                2460          1    0.0    0.0     0.0    0.0
+ CAF:$fMonadId1                         Data.Vector.Fusion.Util       <no location info>                                2152          0    0.0    0.0     0.0    0.0
+  return                                Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:35:3-15                2459          1    0.0    0.0     0.0    0.0
+ CAF:arr_rhqI                           Main                          <no location info>                                2344          0    0.0    0.0    16.3   15.9
+  main                                  Main                          app/Main.hs:(78,1)-(80,67)                        2358          0    0.0    0.0    16.3   15.9
+   timeDev                              Main                          app/Main.hs:(59,1)-(72,28)                        2360         10    0.0    0.0    16.3   15.9
+    extent                              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2362         30    0.0    0.0     0.0    0.0
+    extent                              Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2361         30    0.0    0.0     0.0    0.0
+    intersectDim                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2404         20    0.0    0.0     0.0    0.0
+    deepSeqArray                        Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(41,2)-(42,32)    2405         10    0.0    0.0    16.3   15.6
+     deepSeq                            Data.Array.Repa.Index         Data/Array/Repa/Index.hs:170:9-52                 2406         10    0.0    0.0    16.3   15.6
+      extent                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2408         20    0.0    0.0     0.0    0.0
+      deepSeq                           Data.Array.Repa.Index         Data/Array/Repa/Index.hs:106:9-35                 2407         10    0.0    0.0     0.0    0.0
+      loadS                             Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(57,2)-(62,47)    2431         10    0.0    0.0    16.3   15.4
+       deepSeqMVec                      Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(78,2)-(79,15)    2432         10    1.9    3.0    16.3   15.4
+        unsafeIndex                     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2443   31457280    2.4    1.5    11.6    9.9
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2451   31457280    0.8    1.0     0.8    1.0
+          toIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2452   31457280    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2450   20971510    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2444   20971510    1.0    2.0     6.7    6.9
+          linearIndex                   Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2445   20971510    3.7    3.5     5.7    5.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2446   20971510    1.7    1.5     1.8    1.5
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2447   20971510    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2448   20971510    0.2    0.0     0.2    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2449   20971510    0.0    0.0     0.0    0.0
+           addDim                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(125,9)-(126,45)         2461   10485750    0.1    0.0     0.1    0.0
+            addDim                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:79:9-35                  2462   10485750    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2453   10485770    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2454   10485770    0.4    0.0     1.7    0.5
+          basicUnsafeIndexM             Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:841-899           2456   10485770    0.2    0.0     1.4    0.5
+           basicUnsafeIndexM            Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 2457   10485770    1.2    0.5     1.2    0.5
+            indexByteArray#             Data.Primitive.Types          Data/Primitive/Types.hs:193:223-291               2458   10485770    0.0    0.0     0.0    0.0
+          unId                          Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:25:21-24               2455   10485770    0.0    0.0     0.0    0.0
+        fromIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2439   10485770    0.3    0.0     0.5    0.0
+         fromIndex                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2440   10485770    0.0    0.0     0.0    0.0
+         fromIndex.r                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2441   10485770    0.2    0.0     0.2    0.0
+          rank                          Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2442   10485770    0.0    0.0     0.0    0.0
+        unsafeWriteMVec                 Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    2434   10485770    0.7    1.2     2.3    2.5
+         basicUnsafeWrite               Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1510-1571         2435   10485770    0.1    0.0     1.6    1.2
+          basicUnsafeWrite              Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         2436   10485770    0.6    1.2     1.5    1.2
+           primitive                    Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2437   10485770    0.8    0.0     0.9    0.0
+            writeByteArray#             Data.Primitive.Types          Data/Primitive/Types.hs:193:448-517               2438   10485770    0.1    0.0     0.1    0.0
+        size                            Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2433         10    0.0    0.0     0.0    0.0
+        touchMVec                       Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(82,2)-(83,13)    2741         10    0.0    0.0     0.0    0.0
+      newMVec                           Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(65,2)-(66,26)    2411         10    0.0    0.0     0.0    0.2
+       basicInitialize                  Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1273-1324         2420         10    0.0    0.0     0.0    0.0
+        basicInitialize                 Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(105,3)-(108,36) 2421         10    0.0    0.0     0.0    0.0
+         basicInitialize.size           Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:108:7-36         2422         10    0.0    0.0     0.0    0.0
+          sizeOf                        Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2423         10    0.0    0.0     0.0    0.0
+           sizeOf#                      Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2424         10    0.0    0.0     0.0    0.0
+            unI#                        Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2425         10    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2426         10    0.0    0.0     0.0    0.0
+          setByteArray#                 Data.Primitive.Types          Data/Primitive/Types.hs:163:521-878               2427         10    0.0    0.0     0.0    0.0
+           internal                     Control.Monad.Primitive       Control/Monad/Primitive.hs:97:3-21                2428         10    0.0    0.0     0.0    0.0
+           setByteArray#.i              Data.Primitive.Types          Data/Primitive/Types.hs:163:596-619               2429         10    0.0    0.0     0.0    0.0
+           setByteArray#.n              Data.Primitive.Types          Data/Primitive/Types.hs:163:660-683               2430         10    0.0    0.0     0.0    0.0
+       basicUnsafeNew                   Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1194-1249         2412         10    0.0    0.0     0.0    0.2
+        basicUnsafeNew                  Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)  2413         10    0.0    0.0     0.0    0.2
+         basicUnsafeNew.mx              Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:102:7-37         2414         10    0.0    0.0     0.0    0.0
+         basicUnsafeNew.size            Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:101:7-36         2415         10    0.0    0.0     0.0    0.0
+          sizeOf                        Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2416         10    0.0    0.0     0.0    0.0
+           sizeOf#                      Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2417         10    0.0    0.0     0.0    0.0
+            unI#                        Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2418         10    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2419         10    0.0    0.2     0.0    0.2
+      size                              Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2409         10    0.0    0.0     0.0    0.0
+       size                             Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2410         10    0.0    0.0     0.0    0.0
+      unsafeFreezeMVec                  Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(73,2)-(75,34)    2742         10    0.0    0.0     0.0    0.0
+       basicUnsafeFreeze                Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:511-584           2743         10    0.0    0.0     0.0    0.0
+        basicUnsafeFreeze               Data.Vector.Primitive         Data/Vector/Primitive.hs:(208,3)-(209,51)         2744         10    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2745         10    0.0    0.0     0.0    0.0
+    timeDev.timeDevSub                  Main                          app/Main.hs:(64,5)-(72,28)                        2463         10    0.0    0.0     0.0    0.2
+     extent                             Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2465         40    0.0    0.0     0.0    0.0
+     timeDev.timeDevSub.><              Main                          app/Main.hs:72:9-28                               2466         30    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2467         30    0.0    0.0     0.0    0.0
+     intersectDim                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(121,9)-(122,55)         2464         20    0.0    0.0     0.0    0.0
+      intersectDim                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2555         10    0.0    0.0     0.0    0.0
+     deepSeqArray                       Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(41,2)-(42,32)    2565         10    0.0    0.0     0.0    0.2
+      deepSeq                           Data.Array.Repa.Index         Data/Array/Repa/Index.hs:170:9-52                 2566         10    0.0    0.0     0.0    0.2
+       extent                           Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2568         20    0.0    0.0     0.0    0.0
+       deepSeq                          Data.Array.Repa.Index         Data/Array/Repa/Index.hs:106:9-35                 2567         10    0.0    0.0     0.0    0.0
+       loadP                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(49,2)-(54,47)    2591         10    0.0    0.0     0.0    0.0
+        deepSeqMVec                     Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(78,2)-(79,15)    2592         10    0.0    0.0     0.0    0.0
+         gangIO                         Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(176,1)-(185,25)     2608         10    0.0    0.0     0.0    0.0
+          parIO                         Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(204,1)-(210,32)     2609         10    0.0    0.0     0.0    0.0
+           parIO.\                      Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:207:22-45            2610         10    0.0    0.0     0.0    0.0
+         gangSize                       Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(85,1)-(86,11)       2594         10    0.0    0.0     0.0    0.0
+         size                           Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2593         10    0.0    0.0     0.0    0.0
+         touchMVec                      Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(82,2)-(83,13)    2736         10    0.0    0.0     0.0    0.0
+       newMVec                          Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(65,2)-(66,26)    2571         10    0.0    0.0     0.0    0.2
+        basicInitialize                 Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1273-1324         2580         10    0.0    0.0     0.0    0.0
+         basicInitialize                Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(105,3)-(108,36) 2581         10    0.0    0.0     0.0    0.0
+          basicInitialize.size          Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:108:7-36         2582         10    0.0    0.0     0.0    0.0
+           sizeOf                       Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2583         10    0.0    0.0     0.0    0.0
+            sizeOf#                     Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2584         10    0.0    0.0     0.0    0.0
+             unI#                       Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2585         10    0.0    0.0     0.0    0.0
+          primitive                     Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2586         10    0.0    0.0     0.0    0.0
+           setByteArray#                Data.Primitive.Types          Data/Primitive/Types.hs:163:521-878               2587         10    0.0    0.0     0.0    0.0
+            internal                    Control.Monad.Primitive       Control/Monad/Primitive.hs:97:3-21                2588         10    0.0    0.0     0.0    0.0
+            setByteArray#.i             Data.Primitive.Types          Data/Primitive/Types.hs:163:596-619               2589         10    0.0    0.0     0.0    0.0
+            setByteArray#.n             Data.Primitive.Types          Data/Primitive/Types.hs:163:660-683               2590         10    0.0    0.0     0.0    0.0
+        basicUnsafeNew                  Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1194-1249         2572         10    0.0    0.0     0.0    0.2
+         basicUnsafeNew                 Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)  2573         10    0.0    0.0     0.0    0.2
+          basicUnsafeNew.mx             Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:102:7-37         2574         10    0.0    0.0     0.0    0.0
+          basicUnsafeNew.size           Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:101:7-36         2575         10    0.0    0.0     0.0    0.0
+           sizeOf                       Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2576         10    0.0    0.0     0.0    0.0
+            sizeOf#                     Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2577         10    0.0    0.0     0.0    0.0
+             unI#                       Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2578         10    0.0    0.0     0.0    0.0
+          primitive                     Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2579         10    0.0    0.2     0.0    0.2
+       size                             Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2569         10    0.0    0.0     0.0    0.0
+        size                            Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2570         10    0.0    0.0     0.0    0.0
+       unsafeFreezeMVec                 Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(73,2)-(75,34)    2737         10    0.0    0.0     0.0    0.0
+        basicUnsafeFreeze               Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:511-584           2738         10    0.0    0.0     0.0    0.0
+         basicUnsafeFreeze              Data.Vector.Primitive         Data/Vector/Primitive.hs:(208,3)-(209,51)         2739         10    0.0    0.0     0.0    0.0
+          primitive                     Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2740         10    0.0    0.0     0.0    0.0
+     timeDev.timeDevSub.u1              Main                          app/Main.hs:67:9-37                               2468         10    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2470         40    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2469         20    0.0    0.0     0.0    0.0
+      intersectDim                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2550         20    0.0    0.0     0.0    0.0
+     timeDev.timeDevSub.u2              Main                          app/Main.hs:68:9-37                               2551         10    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2553         40    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2552         20    0.0    0.0     0.0    0.0
+      intersectDim                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2554         20    0.0    0.0     0.0    0.0
+     timeDev.timeDevSub.u3              Main                          app/Main.hs:69:9-34                               2556         10    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2557         20    0.0    0.0     0.0    0.0
+      extent                            Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2563         10    0.0    0.0     0.0    0.0
+      intersectDim                      Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2564         10    0.0    0.0     0.0    0.0
+ CAF:doBoundsChecks                     Data.Vector.Internal.Check    Data/Vector/Internal/Check.hs:55:1-14             2155          0    0.0    0.0     0.0    0.0
+  doBoundsChecks                        Data.Vector.Internal.Check    Data/Vector/Internal/Check.hs:55:1-21             2370          1    0.0    0.0     0.0    0.0
+ CAF:doUnsafeChecks                     Data.Vector.Internal.Check    Data/Vector/Internal/Check.hs:64:1-14             2156          0    0.0    0.0     0.0    0.0
+  doUnsafeChecks                        Data.Vector.Internal.Check    Data/Vector/Internal/Check.hs:64:1-22             2371          1    0.0    0.0     0.0    0.0
+ CAF:dr1                                Main                          <no location info>                                2325          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2689          0    0.0    0.0     0.0    0.0
+ CAF:dr10                               Main                          <no location info>                                2307          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2674          0    0.0    0.0     0.0    0.0
+   d                                    Main                          app/Main.hs:38:1-7                                2675          1    0.0    0.0     0.0    0.0
+ CAF:dr2                                Main                          <no location info>                                2323          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2698          0    0.0    0.0     0.0    0.0
+   dr.dx                                Main                          app/Main.hs:44:5-42                               2699          0    0.0    0.0     0.0    0.0
+ CAF:dr3                                Main                          <no location info>                                2309          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2692          0    0.0    0.0     0.0    0.0
+   dr.dx                                Main                          app/Main.hs:44:5-42                               2693          0    0.0    0.0     0.0    0.0
+    xMax                                Main                          app/Main.hs:29:1-9                                2694          1    0.0    0.0     0.0    0.0
+ CAF:dr4                                Main                          <no location info>                                2308          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2695          0    0.0    0.0     0.0    0.0
+   dr.dx                                Main                          app/Main.hs:44:5-42                               2696          0    0.0    0.0     0.0    0.0
+    xMin                                Main                          app/Main.hs:26:1-10                               2697          1    0.0    0.0     0.0    0.0
+ CAF:dr5                                Main                          <no location info>                                2322          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2673          0    0.0    0.0     0.0    0.0
+ CAF:dr6                                Main                          <no location info>                                2318          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2686          0    0.0    0.0     0.0    0.0
+   dt.dx                                Main                          app/Main.hs:35:5-42                               2687          0    0.0    0.0     0.0    0.0
+ CAF:dr7                                Main                          <no location info>                                2311          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2680          0    0.0    0.0     0.0    0.0
+   dt.dx                                Main                          app/Main.hs:35:5-42                               2681          0    0.0    0.0     0.0    0.0
+    xMax                                Main                          app/Main.hs:29:1-9                                2682          1    0.0    0.0     0.0    0.0
+ CAF:dr8                                Main                          <no location info>                                2310          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2683          0    0.0    0.0     0.0    0.0
+   dt.dx                                Main                          app/Main.hs:35:5-42                               2684          0    0.0    0.0     0.0    0.0
+    xMin                                Main                          app/Main.hs:26:1-10                               2685          1    0.0    0.0     0.0    0.0
+ CAF:dr9                                Main                          <no location info>                                2320          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2677          0    0.0    0.0     0.0    0.0
+ CAF:dr_$sdr                            Main                          app/Main.hs:41:1-2                                2326          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2672          1    0.0    0.0     0.0    0.0
+ CAF:dr_$sdt                            Main                          app/Main.hs:32:1-2                                2321          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2676          1    0.0    0.0     0.0    0.0
+ CAF:dr_$sdx                            Main                          app/Main.hs:44:5-6                                2324          0    0.0    0.0     0.0    0.0
+  dr                                    Main                          app/Main.hs:(41,1)-(44,42)                        2690          0    0.0    0.0     0.0    0.0
+   dr.dx                                Main                          app/Main.hs:44:5-42                               2691          1    0.0    0.0     0.0    0.0
+ CAF:dr_$sdx1                           Main                          app/Main.hs:35:5-6                                2319          0    0.0    0.0     0.0    0.0
+  dt                                    Main                          app/Main.hs:(32,1)-(35,42)                        2678          0    0.0    0.0     0.0    0.0
+   dt.dx                                Main                          app/Main.hs:35:5-42                               2679          1    0.0    0.0     0.0    0.0
+ CAF:dr_$snDiv                          Main                          app/Main.hs:23:1-4                                2317          0    0.0    0.0     0.0    0.0
+  nDiv                                  Main                          app/Main.hs:23:1-16                               2688          1    0.0    0.0     0.0    0.0
+ CAF:len_rhqK                           Main                          <no location info>                                2346          0    0.0    0.0     0.0    0.0
+  main                                  Main                          app/Main.hs:(78,1)-(80,67)                        2353          0    0.0    0.0     0.0    0.0
+   extent                               Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2354          1    0.0    0.0     0.0    0.0
+   size                                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2355          1    0.0    0.0     0.0    0.0
+    size                                Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2746          1    0.0    0.0     0.0    0.0
+ CAF:lvl21_r9il                         Data.Array.Repa.Eval.Gang     <no location info>                                2271          0    0.0    0.0     0.0    0.0
+  forkGang                              Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(91,1)-(115,47)      2605          0    0.0    0.0     0.0    0.0
+ CAF:lvl22_r9im                         Data.Array.Repa.Eval.Gang     <no location info>                                2273          0    0.0    0.0     0.0    0.0
+ CAF:lvl23_r9in                         Data.Array.Repa.Eval.Gang     <no location info>                                2274          0    0.0    0.0     0.0    0.0
+  forkGang                              Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(91,1)-(115,47)      2601          0    0.0    0.0     0.0    0.0
+ CAF:lvl24_r9io                         Data.Array.Repa.Eval.Gang     <no location info>                                2276          0    0.0    0.0     0.0    0.0
+ CAF:lvl25_r9ip                         Data.Array.Repa.Eval.Gang     <no location info>                                2278          0    0.0    0.0     0.0    0.0
+  forkGang                              Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(91,1)-(115,47)      2596          1    0.0    0.0     0.0    0.0
+ CAF:lvl38_rhqu                         Main                          <no location info>                                2338          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2558          0    0.0    0.0     0.0    0.0
+   timeDev.timeDevSub                   Main                          app/Main.hs:(64,5)-(72,28)                        2559          0    0.0    0.0     0.0    0.0
+    timeDev.timeDevSub.u3               Main                          app/Main.hs:69:9-34                               2560          0    0.0    0.0     0.0    0.0
+     extent                             Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2561          3    0.0    0.0     0.0    0.0
+     intersectDim                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:76:9-35                  2562          1    0.0    0.0     0.0    0.0
+ CAF:lvl40_rhqw                         Main                          <no location info>                                2339          0    0.0    0.0     0.0    0.0
+ CAF:lvl42_rhqy                         Main                          <no location info>                                2340          0    0.0    0.0     0.0    0.0
+ CAF:lvl44_rhqC                         Main                          <no location info>                                2341          0    0.0    0.0     0.0    0.0
+ CAF:lvl46_rhqE                         Main                          <no location info>                                2342          0    0.0    0.0     0.0    0.0
+ CAF:lvl49_rhqJ                         Main                          <no location info>                                2345          0    0.0    0.0     0.0    0.0
+  main                                  Main                          app/Main.hs:(78,1)-(80,67)                        2356          0    0.0    0.0     0.0    0.0
+   extent                               Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2357          0    0.0    0.0     0.0    0.0
+ CAF:lvl4_rhpL                          Main                          <no location info>                                2315          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2402          0    0.0    0.0     0.0    0.0
+ CAF:lvl6_rhpN                          Main                          <no location info>                                2316          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2401          0    0.0    0.0     0.0    0.0
+ CAF:main1                              Main                          <no location info>                                2348          0    0.0    0.0     0.0    0.0
+  main                                  Main                          app/Main.hs:(78,1)-(80,67)                        2350          1    0.0    0.0     0.0    0.0
+ CAF:main2                              Main                          <no location info>                                2347          0    0.0    0.0     0.8    0.3
+  main                                  Main                          app/Main.hs:(78,1)-(80,67)                        2352          0    0.3    0.2     0.8    0.3
+   unsafeLinearIndex                    Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2747    1048577    0.3    0.0     0.5    0.0
+    basicUnsafeIndexM                   Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:841-899           2749    1048577    0.0    0.0     0.2    0.0
+     basicUnsafeIndexM                  Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 2750    1048577    0.2    0.0     0.2    0.0
+      indexByteArray#                   Data.Primitive.Types          Data/Primitive/Types.hs:193:223-291               2751    1048577    0.0    0.0     0.0    0.0
+    unId                                Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:25:21-24               2748    1048577    0.0    0.0     0.0    0.0
+ CAF:makeInitCondition1                 Main                          <no location info>                                2314          0    0.0    0.0     0.0    0.0
+  makeInitCondition                     Main                          app/Main.hs:(49,1)-(55,45)                        2478          0    0.0    0.0     0.0    0.0
+ CAF:makeInitCondition3                 Main                          <no location info>                                2313          0    0.0    0.0     0.0    0.0
+  makeInitCondition                     Main                          app/Main.hs:(49,1)-(55,45)                        2479          0    0.0    0.0     0.0    0.0
+ CAF:makeInitCondition_$snDiv           Main                          app/Main.hs:23:1-4                                2312          0    0.0    0.0     0.0    0.0
+  nDiv                                  Main                          app/Main.hs:23:1-16                               2403          1    0.0    0.0     0.0    0.0
+ CAF:sIZEOF_DOUBLE                      Data.Primitive.MachDeps       Data/Primitive/MachDeps.hs:77:1-13                1364          0    0.0    0.0     0.0    0.0
+  sIZEOF_DOUBLE                         Data.Primitive.MachDeps       Data/Primitive/MachDeps.hs:77:1-17                2379          1    0.0    0.0     0.0    0.0
+ CAF:sat_s9nZ                           Data.Array.Repa.Eval.Gang     <no location info>                                2277          0    0.0    0.0     0.0    0.0
+  theGang.caps                          Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:43:13-41             2598          1    0.0    0.0     0.0    0.0
+ CAF:theGang                            Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:41:1-7               2279          0    0.0    0.0     0.0    0.0
+  theGang                               Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(41,1)-(44,21)       2595          1    0.0    0.0     0.0    0.0
+   forkGang                             Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(91,1)-(115,47)      2597          0    0.0    0.0     0.0    0.0
+    forkGang.\                          Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:103:28-76            2607          1    0.0    0.0     0.0    0.0
+    gangWorker                          Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(122,1)-(139,34)     2613          1    0.0    0.0     0.0    0.0
+ CAF:u                                  Main                          app/Main.hs:75:1                                  2335          0    0.0    0.0     0.6    1.0
+  u                                     Main                          app/Main.hs:75:1-40                               2471          1    0.0    0.0     0.6    1.0
+   makeInitCondition                    Main                          app/Main.hs:(49,1)-(55,45)                        2472          1    0.0    0.0     0.6    1.0
+    fromList                            Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:(39,1)-(47,40)     2475          1    0.1    0.0     0.3    0.3
+     unsafeWriteMVec                    Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    2501    1048577    0.1    0.1     0.2    0.2
+      basicUnsafeWrite                  Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1510-1571         2502    1048577    0.0    0.0     0.2    0.1
+       basicUnsafeWrite                 Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         2503    1048577    0.1    0.1     0.2    0.1
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2504    1048577    0.1    0.0     0.1    0.0
+         writeByteArray#                Data.Primitive.Types          Data/Primitive/Types.hs:193:448-517               2505    1048577    0.0    0.0     0.0    0.0
+     fromList.len                       Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:41:13-27           2476          1    0.0    0.0     0.0    0.0
+     newMVec                            Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(65,2)-(66,26)    2481          1    0.0    0.0     0.0    0.0
+      basicInitialize                   Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1273-1324         2490          1    0.0    0.0     0.0    0.0
+       basicInitialize                  Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(105,3)-(108,36) 2491          1    0.0    0.0     0.0    0.0
+        basicInitialize.size            Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:108:7-36         2492          1    0.0    0.0     0.0    0.0
+         sizeOf                         Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2493          1    0.0    0.0     0.0    0.0
+          sizeOf#                       Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2494          1    0.0    0.0     0.0    0.0
+           unI#                         Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2495          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2496          1    0.0    0.0     0.0    0.0
+         setByteArray#                  Data.Primitive.Types          Data/Primitive/Types.hs:163:521-878               2497          1    0.0    0.0     0.0    0.0
+          internal                      Control.Monad.Primitive       Control/Monad/Primitive.hs:97:3-21                2498          1    0.0    0.0     0.0    0.0
+          setByteArray#.i               Data.Primitive.Types          Data/Primitive/Types.hs:163:596-619               2499          1    0.0    0.0     0.0    0.0
+          setByteArray#.n               Data.Primitive.Types          Data/Primitive/Types.hs:163:660-683               2500          1    0.0    0.0     0.0    0.0
+      basicUnsafeNew                    Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1194-1249         2482          1    0.0    0.0     0.0    0.0
+       basicUnsafeNew                   Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)  2483          1    0.0    0.0     0.0    0.0
+        basicUnsafeNew.mx               Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:102:7-37         2484          1    0.0    0.0     0.0    0.0
+        basicUnsafeNew.size             Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:101:7-36         2485          1    0.0    0.0     0.0    0.0
+         sizeOf                         Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2486          1    0.0    0.0     0.0    0.0
+          sizeOf#                       Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2487          1    0.0    0.0     0.0    0.0
+           unI#                         Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2488          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2489          1    0.0    0.0     0.0    0.0
+     size                               Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2477          1    0.0    0.0     0.0    0.0
+      size                              Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2480          1    0.0    0.0     0.0    0.0
+     unsafeFreezeMVec                   Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(73,2)-(75,34)    2510          1    0.0    0.0     0.0    0.0
+      basicUnsafeFreeze                 Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:511-584           2511          1    0.0    0.0     0.0    0.0
+       basicUnsafeFreeze                Data.Vector.Primitive         Data/Vector/Primitive.hs:(208,3)-(209,51)         2512          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2513          1    0.0    0.0     0.0    0.0
+    makeInitCondition.makeList          Main                          app/Main.hs:52:5-55                               2473          1    0.2    0.3     0.2    0.7
+     makeInitCondition.makeInterval     Main                          app/Main.hs:(54,5)-(55,45)                        2474          1    0.1    0.4     0.1    0.4
+      makeInitCondition.makeInterval.dx Main                          app/Main.hs:55:13-45                              2508          1    0.0    0.0     0.0    0.0
+   xMax                                 Main                          app/Main.hs:29:1-9                                2509          1    0.0    0.0     0.0    0.0
+ CAF:u1                                 Main                          <no location info>                                2306          0    0.0    0.0     0.0    0.0
+  u                                     Main                          app/Main.hs:75:1-40                               2506          0    0.0    0.0     0.0    0.0
+   xMin                                 Main                          app/Main.hs:26:1-10                               2507          1    0.0    0.0     0.0    0.0
+ CAF:x_rhpP                             Main                          app/Main.hs:72:14                                 2327          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2717          0    0.0    0.0     0.0    0.0
+   timeDev.timeDevSub                   Main                          app/Main.hs:(64,5)-(72,28)                        2718          0    0.0    0.0     0.0    0.0
+ CAF:zero1_rhqt                         Main                          app/Main.hs:66:9-12                               2337          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2514          0    0.0    0.0     0.0    0.0
+   timeDev.timeDevSub                   Main                          app/Main.hs:(64,5)-(72,28)                        2515          0    0.0    0.0     0.0    0.0
+    timeDev.timeDevSub.zero             Main                          app/Main.hs:66:9-47                               2516          1    0.0    0.0     0.0    0.0
+     fromList                           Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:(39,1)-(47,40)     2517          1    0.0    0.0     0.0    0.0
+      fromList.len                      Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:41:13-27           2518          1    0.0    0.0     0.0    0.0
+      newMVec                           Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(65,2)-(66,26)    2521          1    0.0    0.0     0.0    0.0
+       basicInitialize                  Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1273-1324         2530          1    0.0    0.0     0.0    0.0
+        basicInitialize                 Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(105,3)-(108,36) 2531          1    0.0    0.0     0.0    0.0
+         basicInitialize.size           Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:108:7-36         2532          1    0.0    0.0     0.0    0.0
+          sizeOf                        Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2533          1    0.0    0.0     0.0    0.0
+           sizeOf#                      Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2534          1    0.0    0.0     0.0    0.0
+            unI#                        Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2535          1    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2536          1    0.0    0.0     0.0    0.0
+          setByteArray#                 Data.Primitive.Types          Data/Primitive/Types.hs:163:521-878               2537          1    0.0    0.0     0.0    0.0
+           internal                     Control.Monad.Primitive       Control/Monad/Primitive.hs:97:3-21                2538          1    0.0    0.0     0.0    0.0
+           setByteArray#.i              Data.Primitive.Types          Data/Primitive/Types.hs:163:596-619               2539          1    0.0    0.0     0.0    0.0
+           setByteArray#.n              Data.Primitive.Types          Data/Primitive/Types.hs:163:660-683               2540          1    0.0    0.0     0.0    0.0
+       basicUnsafeNew                   Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1194-1249         2522          1    0.0    0.0     0.0    0.0
+        basicUnsafeNew                  Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)  2523          1    0.0    0.0     0.0    0.0
+         basicUnsafeNew.mx              Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:102:7-37         2524          1    0.0    0.0     0.0    0.0
+         basicUnsafeNew.size            Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:101:7-36         2525          1    0.0    0.0     0.0    0.0
+          sizeOf                        Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2526          1    0.0    0.0     0.0    0.0
+           sizeOf#                      Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2527          1    0.0    0.0     0.0    0.0
+            unI#                        Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2528          1    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2529          1    0.0    0.0     0.0    0.0
+      size                              Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2519          1    0.0    0.0     0.0    0.0
+       size                             Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2520          1    0.0    0.0     0.0    0.0
+      unsafeFreezeMVec                  Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(73,2)-(75,34)    2546          1    0.0    0.0     0.0    0.0
+       basicUnsafeFreeze                Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:511-584           2547          1    0.0    0.0     0.0    0.0
+        basicUnsafeFreeze               Data.Vector.Primitive         Data/Vector/Primitive.hs:(208,3)-(209,51)         2548          1    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2549          1    0.0    0.0     0.0    0.0
+      unsafeWriteMVec                   Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    2541          1    0.0    0.0     0.0    0.0
+       basicUnsafeWrite                 Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1510-1571         2542          1    0.0    0.0     0.0    0.0
+        basicUnsafeWrite                Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         2543          1    0.0    0.0     0.0    0.0
+         primitive                      Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2544          1    0.0    0.0     0.0    0.0
+          writeByteArray#               Data.Primitive.Types          Data/Primitive/Types.hs:193:448-517               2545          1    0.0    0.0     0.0    0.0
+ CAF:zero_rhqs                          Main                          app/Main.hs:61:5-8                                2336          0    0.0    0.0     0.0    0.0
+  timeDev                               Main                          app/Main.hs:(59,1)-(72,28)                        2363          0    0.0    0.0     0.0    0.0
+   timeDev.zero                         Main                          app/Main.hs:61:5-43                               2364          1    0.0    0.0     0.0    0.0
+    fromList                            Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:(39,1)-(47,40)     2365          1    0.0    0.0     0.0    0.0
+     fromList.len                       Data.Array.Repa.Eval.Target   Data/Array/Repa/Eval/Target.hs:41:13-27           2366          1    0.0    0.0     0.0    0.0
+     newMVec                            Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(65,2)-(66,26)    2369          1    0.0    0.0     0.0    0.0
+      basicInitialize                   Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1273-1324         2381          1    0.0    0.0     0.0    0.0
+       basicInitialize                  Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(105,3)-(108,36) 2382          1    0.0    0.0     0.0    0.0
+        basicInitialize.size            Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:108:7-36         2383          1    0.0    0.0     0.0    0.0
+         sizeOf                         Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2384          1    0.0    0.0     0.0    0.0
+          sizeOf#                       Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2385          1    0.0    0.0     0.0    0.0
+           unI#                         Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2386          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2387          1    0.0    0.0     0.0    0.0
+         setByteArray#                  Data.Primitive.Types          Data/Primitive/Types.hs:163:521-878               2388          1    0.0    0.0     0.0    0.0
+          internal                      Control.Monad.Primitive       Control/Monad/Primitive.hs:97:3-21                2389          1    0.0    0.0     0.0    0.0
+          setByteArray#.i               Data.Primitive.Types          Data/Primitive/Types.hs:163:596-619               2390          1    0.0    0.0     0.0    0.0
+          setByteArray#.n               Data.Primitive.Types          Data/Primitive/Types.hs:163:660-683               2391          1    0.0    0.0     0.0    0.0
+      basicUnsafeNew                    Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1194-1249         2372          1    0.0    0.0     0.0    0.0
+       basicUnsafeNew                   Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:(96,3)-(102,37)  2373          1    0.0    0.0     0.0    0.0
+        basicUnsafeNew.mx               Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:102:7-37         2374          1    0.0    0.0     0.0    0.0
+        basicUnsafeNew.size             Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:101:7-36         2375          1    0.0    0.0     0.0    0.0
+         sizeOf                         Data.Primitive.Types          Data/Primitive/Types.hs:114:1-25                  2376          1    0.0    0.0     0.0    0.0
+          sizeOf#                       Data.Primitive.Types          Data/Primitive/Types.hs:193:71-101                2377          1    0.0    0.0     0.0    0.0
+           unI#                         Data.Primitive.Types          Data/Primitive/Types.hs:158:1-17                  2378          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2380          1    0.0    0.0     0.0    0.0
+     size                               Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(129,9)-(130,30)         2367          1    0.0    0.0     0.0    0.0
+      size                              Data.Array.Repa.Index         Data/Array/Repa/Index.hs:82:9-35                  2368          1    0.0    0.0     0.0    0.0
+     unsafeFreezeMVec                   Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(73,2)-(75,34)    2397          1    0.0    0.0     0.0    0.0
+      basicUnsafeFreeze                 Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:511-584           2398          1    0.0    0.0     0.0    0.0
+       basicUnsafeFreeze                Data.Vector.Primitive         Data/Vector/Primitive.hs:(208,3)-(209,51)         2399          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2400          1    0.0    0.0     0.0    0.0
+     unsafeWriteMVec                    Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    2392          1    0.0    0.0     0.0    0.0
+      basicUnsafeWrite                  Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1510-1571         2393          1    0.0    0.0     0.0    0.0
+       basicUnsafeWrite                 Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         2394          1    0.0    0.0     0.0    0.0
+        primitive                       Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2395          1    0.0    0.0     0.0    0.0
+         writeByteArray#                Data.Primitive.Types          Data/Primitive/Types.hs:193:448-517               2396          1    0.0    0.0     0.0    0.0
+ main                                   Main                          app/Main.hs:(78,1)-(80,67)                        2351          0   26.0   33.5    26.0   33.5
+ theGang                                Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(41,1)-(44,21)       2611          0    0.0    0.0    56.3   49.3
+  forkGang                              Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(91,1)-(115,47)      2612          0    0.0    0.0    56.3   49.3
+   gangWorker                           Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(122,1)-(139,34)     2614         10    0.0    0.0    56.3   49.3
+    main                                Main                          app/Main.hs:(78,1)-(80,67)                        2615          0    0.0    0.0    56.3   49.3
+     timeDev                            Main                          app/Main.hs:(59,1)-(72,28)                        2616          0    0.0    0.0    56.3   49.3
+      timeDev.timeDevSub                Main                          app/Main.hs:(64,5)-(72,28)                        2617          0    2.7    1.0    56.3   49.3
+       unsafeIndex                      Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2630   41943160    3.3    3.0    16.8   14.9
+        extent                          Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2648   41943160    0.0    0.0     0.0    0.0
+        toIndex                         Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2649   41943160    1.6    0.0     1.6    0.0
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2654   41943160    0.0    0.0     0.0    0.0
+        unsafeLinearIndex               Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2631   41943160    2.5    4.0    11.9   11.9
+         linearIndex                    Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2632   41943160    5.1    5.0     9.4    7.9
+          fromIndex                     Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2644   41943160    3.9    3.0     4.3    3.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2645   41943160    0.0    0.0     0.0    0.0
+           fromIndex.r                  Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2646   41943160    0.4    0.0     0.4    0.0
+            rank                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2647   41943160    0.0    0.0     0.0    0.0
+       deepSeqArray                     Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(41,2)-(42,32)    2618          0    0.0    0.0     4.9    6.4
+        deepSeq                         Data.Array.Repa.Index         Data/Array/Repa/Index.hs:170:9-52                 2619          0    0.0    0.0     4.9    6.4
+         loadP                          Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(49,2)-(54,47)    2620          0    0.0    0.0     4.9    6.4
+          deepSeqMVec                   Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(78,2)-(79,15)    2621          0    1.4    3.2     4.9    6.4
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2650   10485790    0.5    0.7     0.7    0.7
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2651   10485790    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2652   10485790    0.2    0.0     0.2    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2653   10485790    0.0    0.0     0.0    0.0
+           unsafeWriteMVec              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(69,2)-(70,23)    2625   10485790    0.7    1.2     2.7    2.5
+            basicUnsafeWrite            Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:278:1510-1571         2626   10485790    0.2    0.0     2.1    1.2
+             basicUnsafeWrite           Data.Vector.Primitive.Mutable Data/Vector/Primitive/Mutable.hs:115:3-69         2627   10485790    0.7    1.2     1.9    1.2
+              primitive                 Control.Monad.Primitive       Control/Monad/Primitive.hs:94:3-16                2628   10485790    1.1    0.0     1.2    0.0
+               writeByteArray#          Data.Primitive.Types          Data/Primitive/Types.hs:193:448-517               2629   10485790    0.1    0.0     0.1    0.0
+           gangIO                       Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(176,1)-(185,25)     2622          0    0.0    0.0     0.0    0.0
+            parIO                       Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:(204,1)-(210,32)     2623          0    0.0    0.0     0.0    0.0
+             parIO.\                    Data.Array.Repa.Eval.Gang     Data/Array/Repa/Eval/Gang.hs:207:22-45            2624          0    0.0    0.0     0.0    0.0
+       timeDev.timeDevSub.><            Main                          app/Main.hs:72:9-28                               2633          0    2.1    4.5    13.9   15.6
+        unsafeIndex                     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2634   31457370    2.3    2.2    11.8   11.2
+         extent                         Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2642   31457370    0.0    0.0     0.0    0.0
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2643   31457370    1.0    0.0     1.0    0.0
+          toIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2655   31457370    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2635   31457370    1.7    3.0     8.5    8.9
+          linearIndex                   Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2636   31457370    3.8    3.7     6.8    6.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2638   31457370    2.7    2.2     3.0    2.2
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2639   31457370    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2640   31457370    0.3    0.0     0.3    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2641   31457370    0.0    0.0     0.0    0.0
+       timeDev.timeDevSub.u1            Main                          app/Main.hs:67:9-37                               2637          0    1.2    0.0     7.3    5.2
+        unsafeIndex                     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2656   20971570    1.5    0.7     6.1    5.2
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2664   20971570    0.6    1.0     0.6    1.0
+          toIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2665   20971570    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2666   10485790    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2667   10485790    0.4    0.0     1.6    0.5
+          basicUnsafeIndexM             Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:841-899           2669   10485790    0.2    0.0     1.2    0.5
+           basicUnsafeIndexM            Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 2670   10485790    1.0    0.5     1.0    0.5
+            indexByteArray#             Data.Primitive.Types          Data/Primitive/Types.hs:193:223-291               2671   10485790    0.0    0.0     0.0    0.0
+          unId                          Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:25:21-24               2668   10485790    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2663   10485780    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2657   10485780    0.5    1.0     2.4    3.0
+          linearIndex                   Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2658   10485780    1.0    1.2     2.0    2.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2659   10485780    0.9    0.7     1.0    0.7
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2660   10485780    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2661   10485780    0.1    0.0     0.1    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2662   10485780    0.0    0.0     0.0    0.0
+       timeDev.timeDevSub.u2            Main                          app/Main.hs:68:9-37                               2700          0    1.4    0.0     7.9    5.2
+        unsafeIndex                     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2701   20971570    1.7    0.7     6.5    5.2
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2709   20971570    0.5    1.0     0.5    1.0
+          toIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2710   20971570    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2711   10485790    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2712   10485790    0.6    0.0     1.5    0.5
+          basicUnsafeIndexM             Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:841-899           2714   10485790    0.1    0.0     0.9    0.5
+           basicUnsafeIndexM            Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 2715   10485790    0.7    0.5     0.7    0.5
+            indexByteArray#             Data.Primitive.Types          Data/Primitive/Types.hs:193:223-291               2716   10485790    0.0    0.0     0.0    0.0
+          unId                          Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:25:21-24               2713   10485790    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2708   10485780    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2702   10485780    0.4    1.0     2.8    3.0
+          linearIndex                   Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2703   10485780    1.3    1.2     2.4    2.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2704   10485780    1.0    0.7     1.1    0.7
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2705   10485780    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2706   10485780    0.1    0.0     0.1    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2707   10485780    0.0    0.0     0.0    0.0
+       timeDev.timeDevSub.u3            Main                          app/Main.hs:69:9-34                               2719          0    0.6    0.0     2.8    1.0
+        unsafeIndex                     Data.Array.Repa.Base          Data/Array/Repa/Base.hs:28:2-73                   2720   10485810    0.6    0.0     2.3    1.0
+         toIndex                        Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(141,9)-(142,47)         2728   10485810    0.2    0.5     0.2    0.5
+          toIndex                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:89:9-35                  2729   10485810    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(43,2)-(44,12)    2730   10485790    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Repr.Unboxed  Data/Array/Repa/Repr/Unboxed.hs:(39,2)-(40,32)    2731   10485790    0.5    0.0     1.5    0.5
+          basicUnsafeIndexM             Data.Vector.Unboxed.Base      Data/Vector/Unboxed/Base.hs:279:841-899           2733   10485790    0.1    0.0     1.0    0.5
+           basicUnsafeIndexM            Data.Vector.Primitive         Data/Vector/Primitive.hs:222:3-75                 2734   10485790    0.8    0.5     0.8    0.5
+            indexByteArray#             Data.Primitive.Types          Data/Primitive/Types.hs:193:223-291               2735   10485790    0.0    0.0     0.0    0.0
+          unId                          Data.Vector.Fusion.Util       Data/Vector/Fusion/Util.hs:25:21-24               2732   10485790    0.0    0.0     0.0    0.0
+         extent                         Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:(37,2)-(38,12)    2727         20    0.0    0.0     0.0    0.0
+         unsafeLinearIndex              Data.Array.Repa.Base          Data/Array/Repa/Base.hs:35:2-37                   2721         20    0.0    0.0     0.0    0.0
+          linearIndex                   Data.Array.Repa.Repr.Delayed  Data/Array/Repa/Repr/Delayed.hs:34:2-54           2722         20    0.0    0.0     0.0    0.0
+           fromIndex                    Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(145,9)-(153,54)         2723         20    0.0    0.0     0.0    0.0
+            fromIndex                   Data.Array.Repa.Index         Data/Array/Repa/Index.hs:92:9-35                  2724         20    0.0    0.0     0.0    0.0
+            fromIndex.r                 Data.Array.Repa.Index         Data/Array/Repa/Index.hs:(152,17)-(153,54)        2725         20    0.0    0.0     0.0    0.0
+             rank                       Data.Array.Repa.Index         Data/Array/Repa/Index.hs:67:9-35                  2726         20    0.0    0.0     0.0    0.0
